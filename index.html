@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AURVED - School Management System</title>
+    <meta name="description" content="Modern, comprehensive school management system for educational institutions">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, #fafaf9 0%, #f5f5f4 100%);
+            color: #3d3d3d;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            padding: 20px 0;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #c08968, #b67554);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 24px;
+            box-shadow: 0 4px 12px rgba(192, 137, 104, 0.3);
+        }
+        
+        .logo-text h1 {
+            font-size: 28px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #c08968, #a05a3c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .logo-text p {
+            font-size: 12px;
+            color: #6d6d6d;
+            font-weight: 500;
+        }
+        
+        .cta-button {
+            background: linear-gradient(135deg, #c08968, #b67554);
+            color: white;
+            padding: 12px 32px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(192, 137, 104, 0.4);
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(192, 137, 104, 0.5);
+        }
+        
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+        }
+        
+        .hero h2 {
+            font-size: 56px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero .gradient-text {
+            background: linear-gradient(135deg, #c08968, #a05a3c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            color: #6d6d6d;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: #3d3d3d;
+            padding: 12px 32px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            border: 2px solid #e7e5e4;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .btn-secondary:hover {
+            border-color: #c08968;
+            color: #c08968;
+            transform: translateY(-2px);
+        }
+        
+        /* Features Grid */
+        .features {
+            padding: 60px 20px;
+        }
+        
+        .features h3 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 50px;
+            font-weight: 700;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border: 1px solid #e7e5e4;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(192, 137, 104, 0.15);
+            border-color: #c08968;
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #fdf8f6, #f2e8e5);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h4 {
+            font-size: 20px;
+            margin-bottom: 12px;
+            color: #262626;
+        }
+        
+        .feature-card p {
+            color: #6d6d6d;
+            font-size: 14px;
+        }
+        
+        /* Stats Section */
+        .stats {
+            background: linear-gradient(135deg, #c08968, #b67554);
+            padding: 60px 20px;
+            color: white;
+            text-align: center;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .stat-item h5 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+        
+        .stat-item p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        /* Footer */
+        footer {
+            background: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 1px solid #e7e5e4;
+        }
+        
+        footer p {
+            color: #6d6d6d;
+            font-size: 14px;
+        }
+        
+        footer a {
+            color: #c08968;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        footer a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h2 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 16px;
+            }
+            
+            .features h3 {
+                font-size: 28px;
+            }
+            
+            .stat-item h5 {
+                font-size: 36px;
+            }
+            
+            .logo-text h1 {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">A</div>
+                    <div class="logo-text">
+                        <h1>AURVED</h1>
+                        <p>School Management System</p>
+                    </div>
+                </div>
+                <a href="https://rajangupta2690.github.io/aurved-admin/" class="cta-button">View Demo</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h2>Modern School Management <br><span class="gradient-text">Made Simple</span></h2>
+            <p>Comprehensive, user-friendly platform for managing all aspects of your educational institution</p>
+            <div class="hero-buttons">
+                <a href="https://rajangupta2690.github.io/aurved-admin/" class="cta-button">Try Admin Panel</a>
+                <a href="#features" class="btn-secondary">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h3>Complete School Management Solution</h3>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">👨‍🎓</div>
+                    <h4>Student Management</h4>
+                    <p>Complete student records, admission tracking, and profile management</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">✅</div>
+                    <h4>Attendance System</h4>
+                    <p>Real-time attendance marking with instant reports and notifications</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h4>Fee Management</h4>
+                    <p>Automated fee collection, tracking, and financial reporting</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📝</div>
+                    <h4>Examination System</h4>
+                    <p>Schedule exams, manage results, and generate report cards</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">👨‍🏫</div>
+                    <h4>Staff Management</h4>
+                    <p>Teacher profiles, payroll, and performance tracking</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h4>Academic Planning</h4>
+                    <p>Timetables, curriculum management, and homework tracking</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📢</div>
+                    <h4>Communication Hub</h4>
+                    <p>Notices, announcements, and parent-teacher communication</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h4>Reports & Analytics</h4>
+                    <p>Comprehensive reports and data-driven insights</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🚌</div>
+                    <h4>Transport Management</h4>
+                    <p>Vehicle tracking, route planning, and driver management</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h5>17+</h5>
+                    <p>Complete Modules</p>
+                </div>
+                <div class="stat-item">
+                    <h5>100%</h5>
+                    <p>Responsive Design</p>
+                </div>
+                <div class="stat-item">
+                    <h5>⚡</h5>
+                    <p>Lightning Fast</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>© 2024 AURVED School Management System. Built with ❤️ for Education.</p>
+            <p style="margin-top: 10px;">
+                <a href="https://rajangupta2690.github.io/aurved-admin/">View Admin Panel Demo</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
